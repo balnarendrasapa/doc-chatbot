@@ -7,5 +7,6 @@ def app():
     if Option != "Select":
         doc = st.file_uploader("Upload a document", type=["pdf"])
 
-app()
 
+if __name__ == "__main__":
+    app()
