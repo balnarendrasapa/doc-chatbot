@@ -22,14 +22,15 @@ def app():
                 f.write(doc.getbuffer())
             loader = PyPDFLoader("doc.pdf")
             pages = loader.load_and_split()
-            st.write(pages[50])
             embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
             faiss_index = FAISS.from_documents(pages, embeddings)
-            docs = faiss_index.similarity_search("what is NLP", k=2)
-            for doc in docs:
-                st.write(
-                    str(doc.metadata["page"]) + ":", doc.page_content[:300]
-                )
+            Question = st.text_input("Ask a question")
+            if Question != "":
+                docs = faiss_index.similarity_search(Question, k=5)
+                for doc in docs:
+                    st.write(
+                        str(doc.metadata["page"]) + ":", doc.page_content[:300]
+                    )
 
 
 if __name__ == "__main__":
