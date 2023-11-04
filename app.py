@@ -52,7 +52,7 @@ def app():
                 )
                 Question = st.text_input("Ask a question")
                 if Question != "":
-                    st.write(qa.run(Question))
+                    st.write(qa(Question))
 
 
 if __name__ == "__main__":
