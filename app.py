@@ -4,6 +4,7 @@ from langchain.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.chains import RetrievalQA
 from langchain.llms import OpenAI
+from langchain import HuggingFaceHub
 
 
 def app():
@@ -30,7 +31,13 @@ def app():
                     model_name="all-MiniLM-L6-v2"
                 )
                 faiss_index = FAISS.from_documents(pages, embeddings)
-                llm = OpenAI(open_api_key=API)
+                llm = OpenAI(open_api_key=API) if Option == "OpenAI" else (
+                    HuggingFaceHub(
+                        repo_id="tiiuae/falcon-7b-instruct",
+                        model_kwargs={"temperature": 0.5, "max_new_tokens": 500},
+                        huggingfacehub_api_token=API,
+                    )
+                )
                 qa = RetrievalQA.from_chain_type(
                     llm=llm,
                     chain_type="stuff",
