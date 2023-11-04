@@ -4,7 +4,7 @@ from langchain.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.chains import RetrievalQA
 from langchain.llms import OpenAI, huggingface_hub
-from langchain import HuggingFaceHub
+# from langchain import HuggingFaceHub
 
 
 def app():
