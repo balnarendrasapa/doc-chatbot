@@ -28,7 +28,7 @@ def app():
                 pages = loader.load_and_split()
                 embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
                 faiss_index = FAISS.from_documents(pages, embeddings)
-                llm = OpenAI(api_key=API)
+                llm = OpenAI(open_api_key=API)
                 qa = RetrievalQA.from_chain_type(
                     llm=llm,
                     chain_type="stuff",
@@ -39,11 +39,7 @@ def app():
                 )
                 Question = st.text_input("Ask a question")
                 if Question != "":
-                    docs = faiss_index.similarity_search(Question, k=5)
-                    for doc in docs:
-                        st.write(
-                            str(doc.metadata["page"]) + ":", doc.page_content[:300]
-                        )
+                    st.write(qa.run(Question))
 
 
 if __name__ == "__main__":
