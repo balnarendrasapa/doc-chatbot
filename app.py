@@ -34,7 +34,10 @@ def app():
                 llm = OpenAI(open_api_key=API) if Option == "OpenAI" else (
                     HuggingFaceHub(
                         repo_id="tiiuae/falcon-7b-instruct",
-                        model_kwargs={"temperature": 0.5, "max_new_tokens": 500},
+                        model_kwargs={
+                            "temperature": 0.5,
+                            "max_new_tokens": 500
+                        },
                         huggingfacehub_api_token=API,
                     )
                 )
