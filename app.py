@@ -10,6 +10,7 @@ from langchain.llms import HuggingFaceHub
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+
 def app():
     PART_B = False
     st.set_page_config(
