@@ -3,7 +3,7 @@ from langchain.document_loaders import PyPDFLoader
 from langchain.vectorstores import FAISS
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.chains import RetrievalQA
-from langchain.llms import OpenAI
+from langchain.llms import OpenAI, huggingface_hub
 from langchain import HuggingFaceHub
 
 
@@ -32,7 +32,7 @@ def app():
                 )
                 faiss_index = FAISS.from_documents(pages, embeddings)
                 llm = OpenAI(open_api_key=API) if Option == "OpenAI" else (
-                    HuggingFaceHub(
+                    huggingface_hub(
                         repo_id="tiiuae/falcon-7b-instruct",
                         model_kwargs={
                             "temperature": 0.5,
