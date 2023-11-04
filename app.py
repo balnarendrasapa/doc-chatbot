@@ -26,7 +26,9 @@ def app():
                     f.write(doc.getbuffer())
                 loader = PyPDFLoader("doc.pdf")
                 pages = loader.load_and_split()
-                embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+                embeddings = HuggingFaceEmbeddings(
+                    model_name="all-MiniLM-L6-v2"
+                )
                 faiss_index = FAISS.from_documents(pages, embeddings)
                 llm = OpenAI(open_api_key=API)
                 qa = RetrievalQA.from_chain_type(
