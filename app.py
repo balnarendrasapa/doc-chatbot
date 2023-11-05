@@ -67,7 +67,7 @@ def app():
                     )
                     with st.chat_message("user"):
                         st.markdown(prompt)
-                    
+
                     with st.chat_message("assistant"):
                         message_placeholder = st.empty()
                         full_response = ""
