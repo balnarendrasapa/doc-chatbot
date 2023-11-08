@@ -24,7 +24,7 @@ def app():
     st.title("Chat with AI")
     Option = st.selectbox(
         "Select an option",
-        ("Select", "HuggingFace", "OpenAI")
+        ("Select the model", "HuggingFace(Uses Falcon 4b Model)", "OpenAI")
     )
     if Option != "Select":
         API = st.text_input("Enter your " + Option + " API key")
