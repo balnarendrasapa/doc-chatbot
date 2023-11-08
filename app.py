@@ -26,7 +26,11 @@ def app():
     st.markdown("#### Select an Option")
     Option = st.selectbox(
         label="Select the model",
-        options=("Select the model", "HuggingFace(Uses Falcon 4b Model)", "OpenAI"),
+        options=(
+            "Select the model",
+            "HuggingFace(Uses Falcon 4b Model)",
+            "OpenAI"
+        ),
         label_visibility="collapsed"
     )
     if Option != "Select the model":
