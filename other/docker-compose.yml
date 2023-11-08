@@ -1,0 +1,6 @@
+version: "3.8"
+services:
+  chat-app:
+    image: ghcr.io/balnarendrasapa/doc-chatbot:latest
+    ports:
+      - "8501:8501"
