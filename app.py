@@ -5,7 +5,6 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.chains import RetrievalQA
 from langchain.llms import OpenAI
 from langchain.llms import HuggingFaceHub
-import time
 # from langchain import HuggingFaceHub
 
 if "responses" not in st.session_state:
