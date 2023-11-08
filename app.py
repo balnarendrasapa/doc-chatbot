@@ -22,14 +22,22 @@ def app():
         layout="centered"
     )
     st.title("Chat with AI")
+    st.markdown(":violet[Get Huggingface API Read Token or Open AI API Key]")
+    st.markdown("#### Select an Option")
     Option = st.selectbox(
-        "Select an option",
-        ("Select the model", "HuggingFace(Uses Falcon 4b Model)", "OpenAI")
+        label="Select the model",
+        options=("Select the model", "HuggingFace(Uses Falcon 4b Model)", "OpenAI"),
+        label_visibility="collapsed"
     )
-    if Option != "Select":
-        API = st.text_input("Enter your " + Option + " API key")
+    if Option != "Select the model":
+        st.markdown("#### Enter your " + Option + " API key")
+        API = st.text_input(
+            "Enter your " + Option + " API key",
+            label_visibility="collapsed"
+        )
         if API != "":
-            doc = st.file_uploader("Upload a document", type=["pdf"])
+            st.markdown("#### Upload a document")
+            doc = st.file_uploader("Upload a document", type=["pdf"], label_visibility="collapsed")
             if doc is not None:
                 with open("doc.pdf", "wb") as f:
                     f.write(doc.getbuffer())
