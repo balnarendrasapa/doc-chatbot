@@ -57,25 +57,39 @@ def app():
                         search_kwargs={'fetch_k': 10}),
                     return_source_documents=True
                 )
+
+                container = st.container()
                 st.write("Ask Your Question Here")
                 question = st.text_input(
                     "Ask your question here",
                     label_visibility="collapsed"
                 )
-                with st.chat_message("assistant"):
-                    st.write("How can I help you?")
+                with container:
+                    with st.chat_message("assistant"):
+                        st.write("How can I help you?")
 
-                if question != "":
-                    response = qa(question)
-                    st.session_state.responses.append(response)
-                    st.session_state.questions.append(question)
+                    if question != "":
+                        response = qa(question)
+                        st.session_state.responses.append(response)
+                        st.session_state.questions.append(question)
 
-                    for i in range(len(st.session_state.responses)):
-                        with st.chat_message("user"):
-                            st.write(st.session_state.questions[i - 1])
+                        for i in range(len(st.session_state.responses)):
+                            with st.chat_message("user"):
+                                st.write(st.session_state.questions[i - 1])
 
-                        with st.chat_message("assistant"):
-                            st.write(st.session_state.responses[i])
+                            with st.chat_message("assistant"):
+                                result = st.session_state.responses[i]
+                                st.write(result['result'])
+                                st.write("Source documents: ")
+                                for i in result['source_documents'][:2]:
+                                    st.divider()
+                                    st.write(i.page_content)
+                                    st.write(
+                                        "Page Number: " + str(
+                                            i.metadata['page']
+                                        )
+                                    )
+                                st.divider()
 
 
 
