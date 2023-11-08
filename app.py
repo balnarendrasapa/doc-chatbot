@@ -82,13 +82,10 @@ def app():
                                 st.write(result['result'])
                                 st.write("Source documents: ")
                                 for i in result['source_documents'][:2]:
-                                    st.divider()
-                                    st.write(i.page_content)
-                                    st.write(
-                                        "Page Number: " + str(
-                                            i.metadata['page']
-                                        )
-                                    )
+                                    with st.expander(
+                                        "Page " + str(i.metadata['page'])
+                                    ):
+                                        st.write(i.page_content)
                                 st.divider()
 
 
