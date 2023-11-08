@@ -81,7 +81,7 @@ def app():
                                 result = st.session_state.responses[i]
                                 st.write(result['result'])
                                 st.write("Source documents: "
-                                         "(Most Relevant are first)")
+                                         "(Most relevant are first)")
                                 for i in result['source_documents']:
                                     with st.expander(
                                         "Page " + str(i.metadata['page'])
