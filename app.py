@@ -78,7 +78,10 @@ def app():
                                 st.write(st.session_state.questions[i - 1])
 
                             with st.chat_message("assistant"):
-                                with st.expander("Response"):
+                                with st.expander(
+                                    "Response (Click here to collapse)",
+                                    expanded=True
+                                ):
                                     result = st.session_state.responses[i]
                                     st.write(result['result'])
                                 st.write("Source documents: "
