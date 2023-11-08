@@ -8,12 +8,11 @@ from langchain.llms import HuggingFaceHub
 import time
 # from langchain import HuggingFaceHub
 
-if "messages" not in st.session_state:
-    st.session_state.messages = []
+if "responses" not in st.session_state:
+    st.session_state.responses = []
 
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+if "questions" not in st.session_state:
+    st.session_state.questions = []
 
 
 def app():
@@ -58,31 +57,26 @@ def app():
                         search_kwargs={'fetch_k': 10}),
                     return_source_documents=True
                 )
-                if prompt := st.chat_input("What is up?"):
-                    st.session_state.messages.append(
-                        {
-                            "role": "user",
-                            "content": prompt
-                        }
-                    )
-                    with st.chat_message("user"):
-                        st.markdown(prompt)
+                st.write("Ask Your Question Here")
+                question = st.text_input(
+                    "Ask your question here",
+                    label_visibility="collapsed"
+                )
+                with st.chat_message("assistant"):
+                    st.write("How can I help you?")
 
-                    with st.chat_message("assistant"):
-                        message_placeholder = st.empty()
-                        full_response = ""
-                        assistant_response = qa(prompt)
-                        for chunk in assistant_response["result"].split():
-                            full_response += chunk + " "
-                            time.sleep(0.05)
-                            message_placeholder.markdown(full_response + "▌")
-                        message_placeholder.markdown(full_response)
-                    st.session_state.messages.append(
-                        {
-                            "role": "assistant",
-                            "content": full_response
-                        }
-                    )
+                if question != "":
+                    response = qa(question)
+                    st.session_state.responses.append(response)
+                    st.session_state.questions.append(question)
+
+                    for i in range(len(st.session_state.responses)):
+                        with st.chat_message("user"):
+                            st.write(st.session_state.questions[i - 1])
+
+                        with st.chat_message("assistant"):
+                            st.write(st.session_state.responses[i])
+
 
 
 if __name__ == "__main__":
