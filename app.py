@@ -70,21 +70,22 @@ def app():
 
                     if question != "":
                         response = qa(question)
-                        st.session_state.responses.append(response)
-                        st.session_state.questions.append(question)
+                        st.session_state.responses.insert(0, response)
+                        st.session_state.questions.insert(0, question)
 
                         for i in range(len(st.session_state.responses)):
                             with st.chat_message("user"):
                                 st.write(st.session_state.questions[i - 1])
 
                             with st.chat_message("assistant"):
-                                result = st.session_state.responses[i]
-                                st.write(result['result'])
+                                with st.expander("Response"):
+                                    result = st.session_state.responses[i]
+                                    st.write(result['result'])
                                 st.write("Source documents: "
                                          "(Most relevant are first)")
                                 for i in result['source_documents']:
                                     with st.expander(
-                                        "Page " + str(i.metadata['page'])
+                                        "Page: " + str(i.metadata['page'])
                                     ):
                                         st.write(i.page_content)
                                 st.divider()
