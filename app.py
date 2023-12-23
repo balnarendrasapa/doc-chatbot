@@ -27,7 +27,7 @@ def app():
         label="Select the model",
         options=(
             "Select the model",
-            "HuggingFace(Uses Falcon 4b Model)",
+            "HuggingFace(Uses Falcon 7b Model)",
             "OpenAI"
         ),
         label_visibility="collapsed"
