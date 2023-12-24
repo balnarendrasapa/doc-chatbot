@@ -1,6 +1,7 @@
 # ChatBot with documents
 
 - Provide a pdf to this chatbot and ask a question. It answers the question based on the pdf.
+- A javascript restful api is also implemented. go [here](https://github.com/balnarendrasapa/doc-chatbot-backend)
 
 ## Running the app - Method 1
 
